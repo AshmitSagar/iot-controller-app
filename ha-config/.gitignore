@@ -1,0 +1,20 @@
+# Ignore runtime files and secrets
+.storage/
+.cache/
+.cloud/
+*.db
+*.db-shm
+*.db-wal
+*.log
+*.log.*
+.HA_VERSION
+.ha_run.lock
+secrets.yaml
+known_devices.yaml
+
+# Keep configuration files
+!configuration.yaml
+!automations.yaml
+!scripts.yaml
+!scenes.yaml
+!blueprints/
