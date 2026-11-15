@@ -1,0 +1,17 @@
+- generic [ref=f2e5]:
+  - generic [ref=f2e6]:
+    - heading "IoT Controller" [level=2] [ref=f2e7]
+    - paragraph [ref=f2e8]: Connect to your Home Assistant instance
+  - generic [ref=f2e9]:
+    - generic [ref=f2e10]:
+      - generic [ref=f2e11]:
+        - generic [ref=f2e12]: Home Assistant URL
+        - textbox "Home Assistant URL" [ref=f2e13]:
+          - /placeholder: http://localhost:8123
+          - text: http://localhost:8123
+      - generic [ref=f2e14]:
+        - generic [ref=f2e15]: Long-Lived Access Token
+        - textbox "Long-Lived Access Token" [ref=f2e16]:
+          - /placeholder: Enter your access token
+        - paragraph [ref=f2e17]: "Generate in Home Assistant: Profile → Security → Long-Lived Access Tokens"
+    - button "Connect to Home Assistant" [disabled] [ref=f2e19]

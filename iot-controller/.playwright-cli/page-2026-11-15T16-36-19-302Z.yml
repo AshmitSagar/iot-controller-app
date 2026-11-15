@@ -1,0 +1,19 @@
+- generic [ref=e5]:
+  - generic [ref=e6]:
+    - heading "IoT Controller" [level=2] [ref=e7]
+    - paragraph [ref=e8]: Connect to your Home Assistant instance
+  - generic [ref=e9]:
+    - generic [ref=e10]:
+      - generic [ref=e11]:
+        - generic [ref=e12]: Home Assistant URL
+        - textbox "Home Assistant URL" [ref=e13]:
+          - /placeholder: http://localhost:8123
+          - text: http://localhost:8123
+      - generic [ref=e14]:
+        - generic [ref=e15]: Long-Lived Access Token
+        - textbox "Long-Lived Access Token" [ref=e16]:
+          - /placeholder: Enter your access token
+          - text: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIwODcyMjQxOGUwYWM0NDQ5YWZiODhhMGIwYWFiMWU2NSIsImlhdCI6MTc5NDc2MDE4NywiZXhwIjoyMTEwMTIwMTg3fQ.dvJOAGeO_7FkQevLB5tISGeK81Q5c7aSHy0Kr1Am0NY
+        - paragraph [ref=e17]: "Generate in Home Assistant: Profile → Security → Long-Lived Access Tokens"
+    - paragraph [ref=e26]: "Authentication failed: Invalid token or URL"
+    - button "Connect to Home Assistant" [active] [ref=e19] [cursor=pointer]

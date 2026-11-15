@@ -1,0 +1,185 @@
+<div class="flex h-screen bg-gray-50 dark:bg-gray-900">
+  <!-- Sidebar Navigation -->
+  <aside class="hidden md:flex md:flex-shrink-0">
+    <div class="flex flex-col w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700">
+      <!-- Logo/Title -->
+      <div class="flex items-center h-16 px-4 border-b border-gray-200 dark:border-gray-700">
+        <h1 class="text-xl font-bold text-gray-900 dark:text-white">IoT Controller</h1>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="flex-1 px-2 py-4 space-y-1 overflow-y-auto">
+        <a
+          routerLink="/overview"
+          routerLinkActive="bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400"
+          class="flex items-center px-4 py-3 text-sm font-medium rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 transition-colors"
+        >
+          <span class="text-xl mr-3">🏠</span>
+          Overview
+        </a>
+
+        <a
+          routerLink="/dashboard"
+          routerLinkActive="bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400"
+          class="flex items-center px-4 py-3 text-sm font-medium rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 transition-colors"
+        >
+          <span class="text-xl mr-3">🎛️</span>
+          Devices
+        </a>
+
+        <a
+          routerLink="/automation"
+          routerLinkActive="bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400"
+          class="flex items-center px-4 py-3 text-sm font-medium rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 transition-colors"
+        >
+          <span class="text-xl mr-3">🤖</span>
+          Automations
+        </a>
+
+        <div class="pt-4 pb-2 px-4">
+          <p class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">
+            AI Assistant
+          </p>
+        </div>
+
+        <a
+          routerLink="/ai-chat"
+          routerLinkActive="bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400"
+          class="flex items-center px-4 py-3 text-sm font-medium rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 transition-colors"
+        >
+          <span class="text-xl mr-3">💬</span>
+          Chat
+        </a>
+
+        <a
+          routerLink="/ai-permissions"
+          routerLinkActive="bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400"
+          class="flex items-center px-4 py-3 text-sm font-medium rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 transition-colors"
+        >
+          <span class="text-xl mr-3">🔐</span>
+          Permissions
+        </a>
+
+        <a
+          routerLink="/ai-config"
+          routerLinkActive="bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400"
+          class="flex items-center px-4 py-3 text-sm font-medium rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 transition-colors"
+        >
+          <span class="text-xl mr-3">⚙️</span>
+          AI Settings
+        </a>
+      </nav>
+
+      <!-- User Section -->
+      <div class="flex-shrink-0 border-t border-gray-200 dark:border-gray-700 p-4">
+        @if (websocketService.connected()) {
+          <div class="flex items-center mb-3">
+            <span class="h-2 w-2 bg-green-500 rounded-full mr-2"></span>
+            <span class="text-xs text-gray-600 dark:text-gray-400">
+              Connected • {{ entityCount() }} devices
+            </span>
+          </div>
+        } @else {
+          <div class="flex items-center mb-3">
+            <span class="h-2 w-2 bg-red-500 rounded-full mr-2"></span>
+            <span class="text-xs text-gray-600 dark:text-gray-400">Disconnected</span>
+          </div>
+        }
+
+        <div class="flex items-center justify-between">
+          <button
+            (click)="logout()"
+            class="text-sm text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 font-medium"
+          >
+            Logout
+          </button>
+          <button
+            (click)="themeService.toggleTheme()"
+            class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+            aria-label="Toggle theme"
+          >
+            @if (themeService.theme() === 'dark') {
+              <span class="text-lg">☀️</span>
+            } @else {
+              <span class="text-lg">🌙</span>
+            }
+          </button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Mobile Navigation -->
+  <div class="md:hidden fixed inset-x-0 bottom-0 z-50 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 safe-area-inset-bottom">
+    <nav class="flex justify-around items-center h-16">
+      <a
+        routerLink="/overview"
+        routerLinkActive="text-indigo-600 dark:text-indigo-400"
+        class="flex flex-col items-center justify-center flex-1 h-full text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+      >
+        <span class="text-2xl">🏠</span>
+        <span class="text-xs mt-1">Home</span>
+      </a>
+      <a
+        routerLink="/dashboard"
+        routerLinkActive="text-indigo-600 dark:text-indigo-400"
+        class="flex flex-col items-center justify-center flex-1 h-full text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+      >
+        <span class="text-2xl">🎛️</span>
+        <span class="text-xs mt-1">Devices</span>
+      </a>
+      <a
+        routerLink="/automation"
+        routerLinkActive="text-indigo-600 dark:text-indigo-400"
+        class="flex flex-col items-center justify-center flex-1 h-full text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+      >
+        <span class="text-2xl">🤖</span>
+        <span class="text-xs mt-1">Auto</span>
+      </a>
+      <a
+        routerLink="/ai-chat"
+        routerLinkActive="text-indigo-600 dark:text-indigo-400"
+        class="flex flex-col items-center justify-center flex-1 h-full text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+      >
+        <span class="text-2xl">💬</span>
+        <span class="text-xs mt-1">AI</span>
+      </a>
+      <a
+        routerLink="/ai-config"
+        routerLinkActive="text-indigo-600 dark:text-indigo-400"
+        class="flex flex-col items-center justify-center flex-1 h-full text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+      >
+        <span class="text-2xl">⚙️</span>
+        <span class="text-xs mt-1">Settings</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <div class="flex flex-col flex-1 overflow-hidden">
+    <!-- Top Bar (Mobile) -->
+    <header class="md:hidden bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+      <div class="flex items-center justify-between h-16 px-4">
+        <h1 class="text-lg font-bold text-gray-900 dark:text-white">IoT Controller</h1>
+        <div class="flex items-center space-x-2">
+          <button
+            (click)="themeService.toggleTheme()"
+            class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700"
+            aria-label="Toggle theme"
+          >
+            @if (themeService.theme() === 'dark') {
+              <span class="text-lg">☀️</span>
+            } @else {
+              <span class="text-lg">🌙</span>
+            }
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Router Outlet -->
+    <main class="flex-1 overflow-y-auto pb-16 md:pb-0">
+      <router-outlet />
+    </main>
+  </div>
+</div>

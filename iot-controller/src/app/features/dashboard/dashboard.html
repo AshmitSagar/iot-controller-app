@@ -1,0 +1,122 @@
+<div class="p-4 md:p-6 max-w-7xl mx-auto">
+  <!-- Page Header -->
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">All Devices</h1>
+    <div class="flex items-center text-sm text-gray-600 dark:text-gray-400">
+      @if (connected()) {
+        <span class="flex items-center text-green-600 dark:text-green-400 mr-4">
+          <span class="h-2 w-2 bg-green-600 dark:bg-green-400 rounded-full mr-2"></span>
+          Connected
+        </span>
+      } @else {
+        <span class="flex items-center text-red-600 dark:text-red-400 mr-4">
+          <span class="h-2 w-2 bg-red-600 dark:bg-red-400 rounded-full mr-2"></span>
+          Disconnected
+        </span>
+      }
+      <span>{{ entityCount() }} devices</span>
+    </div>
+  </div>
+
+  @if (!connected()) {
+    <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 mb-6">
+      <div class="flex items-center">
+        <span class="text-2xl mr-3">⚠️</span>
+        <div>
+          <h3 class="font-semibold text-red-900 dark:text-red-200">Not Connected</h3>
+          <p class="text-sm text-red-700 dark:text-red-300">Unable to connect to Home Assistant</p>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Lights Section -->
+  @if (lightEntities().length > 0) {
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+        <span class="text-2xl mr-2">💡</span>
+        Lights ({{ lightEntities().length }})
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        @for (entity of lightEntities(); track entity.entity_id) {
+          <app-light-card [entity]="entity" />
+        }
+      </div>
+    </section>
+  }
+
+  <!-- Switches Section -->
+  @if (switchEntities().length > 0) {
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+        <span class="text-2xl mr-2">🔌</span>
+        Switches ({{ switchEntities().length }})
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        @for (entity of switchEntities(); track entity.entity_id) {
+          <app-switch-card [entity]="entity" />
+        }
+      </div>
+    </section>
+  }
+
+  <!-- Sensors Section -->
+  @if (sensorEntities().length > 0) {
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+        <span class="text-2xl mr-2">📊</span>
+        Sensors ({{ sensorEntities().length }})
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        @for (entity of sensorEntities(); track entity.entity_id) {
+          <app-sensor-card [entity]="entity" />
+        }
+      </div>
+    </section>
+  }
+
+  <!-- Other Entities Section -->
+  @if (otherEntities().length > 0) {
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+        <span class="text-2xl mr-2">🔧</span>
+        Other Devices ({{ otherEntities().length }})
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        @for (entity of otherEntities(); track entity.entity_id) {
+          <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4">
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center">
+                <span class="text-2xl mr-3">{{ getDomainIcon(entity.domain) }}</span>
+                <div>
+                  <h3 class="text-sm font-medium text-gray-900 dark:text-white">
+                    {{ entity.friendly_name }}
+                  </h3>
+                  <p class="text-xs text-gray-500 dark:text-gray-400">
+                    {{ entity.domain }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="mt-2">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                    [ngClass]="getStateClass(entity.state)">
+                {{ entity.state }}
+              </span>
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+  }
+
+  @if (entityCount() === 0 && connected()) {
+    <div class="text-center py-12">
+      <span class="text-6xl mb-4 block">🏠</span>
+      <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">No Devices Found</h3>
+      <p class="text-gray-600 dark:text-gray-400">
+        No entities are available in your Home Assistant instance.
+      </p>
+    </div>
+  }
+</div>

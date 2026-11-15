@@ -1,0 +1,7 @@
+- generic [ref=f1e6]:
+  - heading "AI Device Permissions" [level=1] [ref=f1e7]
+  - paragraph [ref=f1e8]: Grant or revoke AI agent's access to control devices
+  - generic [ref=f1e9]:
+    - button "Grant All" [ref=f1e10] [cursor=pointer]
+    - button "Revoke All" [ref=f1e11] [cursor=pointer]
+  - generic [ref=f1e12]: No devices available. Connect to Home Assistant first.
